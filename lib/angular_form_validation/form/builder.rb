@@ -9,8 +9,7 @@ module AngularFormValidation
 
     FIELD_HELPERS.each do |method_name|
       define_method(method_name) do |method, options = {}|
-        value = @object[method.to_s].gsub("'"){"\\'"}
-        options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{value}'"})
+        options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{escape_value(@object[method.to_s])}'"})
         super(method, options)
       end
     end
@@ -44,6 +43,12 @@ module AngularFormValidation
       html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
       super(method, collection, value_method, text_method, options = {}, html_options, &block)
     end
+
+    def escape_value(value)
+      value.to_s.gsub("'"){"\\'"}
+    end
+
+    private_class_method :persons_name
 
   end
 
