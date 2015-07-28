@@ -2,7 +2,7 @@ module AngularFormValidation
 
   module Helpers
 
-    module FormTagHelper
+    module FormTag
 
       # Add form name attribute (id is added by default)
       def form_tag(url_for_options = {}, options = {}, &block)
