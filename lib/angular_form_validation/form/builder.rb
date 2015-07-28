@@ -9,7 +9,7 @@ module AngularFormValidation
 
     FIELD_HELPERS.each do |method_name|
       define_method(method_name) do |method, options = {}|
-        options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{escape_value(@object[method.to_s])}'"})
+        options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}=\"#{@object[method.to_s]}\""})
         super(method, options)
       end
     end
