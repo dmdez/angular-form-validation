@@ -19,6 +19,11 @@ module AngularFormValidation
       super(value, options)
     end
 
+    def select(method, choices = nil, options = {}, html_options = {}, &block)
+      html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
+      super(method, choices, options, html_options, &block)
+    end
+
     def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
       html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
       super(method, collection, value_method, text_method, options, html_options)
