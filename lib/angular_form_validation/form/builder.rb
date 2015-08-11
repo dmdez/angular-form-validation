@@ -20,12 +20,18 @@ module AngularFormValidation
     end
 
     def select(method, choices = nil, options = {}, html_options = {}, &block)
-      html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
+      html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}"})
+      unless ( @object[method.to_s].blank? )
+        html_options.merge!({"ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
+      end
       super(method, choices, options, html_options, &block)
     end
 
     def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
-      html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
+      html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}"})
+      unless ( @object[method.to_s].blank? )
+        html_options.merge!({"ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
+      end
       super(method, collection, value_method, text_method, options, html_options)
     end
 
