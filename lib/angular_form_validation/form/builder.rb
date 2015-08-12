@@ -54,28 +54,7 @@ module AngularFormValidation
       html_options.merge!({"ng-model" => "#{@object_name}.#{method.to_s}", "ng-init" => "#{@object_name}.#{method.to_s}='#{@object[method.to_s]}'"})
       super(method, collection, value_method, text_method, options = {}, html_options, &block)
     end
-
-    def label(method, content_or_options = nil, options = nil, &block)
-      if content_or_options.is_a?(Hash)
-        content_or_options.each do |key, val|
-          options[key] = val
-        end
-        content_or_options = method.to_s
-      end
-
-      content_or_options ||= method.to_s
-      presence_validations = [ActiveModel::Validations::PresenceValidator, ActiveRecord::Validations::PresenceValidator]
-      #class_obj = options[:object].class if options[:object]
-      class_obj ||= @object_name.to_s.camelize.constantize
-      validations = class_obj.validators_on(method.to_s).map(&:class)
-
-      if (presence_validations.map { |pv| validations.include?(pv) }).any?
-        content_or_options += "*"
-      end
-
-      super(method, content_or_options, options, &block)
-    end
-
+    
   end
 
 end

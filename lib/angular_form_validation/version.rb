@@ -1,3 +1,3 @@
 module AngularFormValidation
-  VERSION = "0.1.93a"
+  VERSION = "0.1.92"
 end
