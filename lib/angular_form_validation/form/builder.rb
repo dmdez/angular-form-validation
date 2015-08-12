@@ -66,8 +66,8 @@ module AngularFormValidation
       content_or_options ||= method.to_s
       presence_validations = [ActiveModel::Validations::PresenceValidator, ActiveRecord::Validations::PresenceValidator]
       #class_obj = options[:object].class if options[:object]
-      #class_obj ||= @object_name.to_s.camelize.constantize
-      validations = @object.validators_on(method.to_s).map(&:class)
+      class_obj ||= @object_name.to_s.camelize.constantize
+      validations = class_obj.validators_on(method.to_s).map(&:class)
 
       if (presence_validations.map { |pv| validations.include?(pv) }).any?
         content_or_options += "*"
